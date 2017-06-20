@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.example.smile.cnsjzhushou.MainActivity">
+    tools:context="com.example.smile.cnsjzhushou.ui.activity.MainActivity">
 
     <LinearLayout
         android:id="@+id/content"
@@ -20,10 +20,25 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:title="@string/app_name">
+            app:title="@string/app_name"
+            android:theme="@style/AppTheme.ToolBar">
 
         </android.support.v7.widget.Toolbar>
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed">
+
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v4.view.ViewPager>
 
     </LinearLayout>
 
@@ -31,7 +46,6 @@
         android:id="@+id/drawer_navigation"
         android:layout_width="320dp"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:layout_gravity="left"
         app:headerLayout="@layout/header_layout"
         app:menu="@menu/nav_left_menu">
