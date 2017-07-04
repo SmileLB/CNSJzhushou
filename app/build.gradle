@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
@@ -32,7 +32,8 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.6.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    //annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    apt 'com.jakewharton:butterknife-compiler:8.6.0'
     //字体
     compile "com.mikepenz:iconics-core:2.8.6@aar"
     compile 'com.mikepenz:ionicons-typeface:2.0.1.2@aar'
@@ -49,5 +50,6 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.0.2' //指定注解处理器
     compile 'com.google.dagger:dagger:2.0.2'  //dagger公用api
     provided 'org.glassfish:javax.annotation:10.0-b28'  //添加android缺失的部分javax注解
-
+    //pathview
+    compile 'com.eftimoff:android-pathview:1.0.8@aar'
 }

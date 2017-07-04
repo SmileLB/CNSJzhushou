@@ -1,4 +1,4 @@
-package com.example.smile.cnsjzhushou.http;
+package com.example.smile.cnsjzhushou.data.http;
 
 import com.example.smile.cnsjzhushou.bean.AppInfo;
 import com.example.smile.cnsjzhushou.bean.PageBean;

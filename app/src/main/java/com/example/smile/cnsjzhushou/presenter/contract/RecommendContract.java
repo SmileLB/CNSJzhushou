@@ -1,7 +1,6 @@
 package com.example.smile.cnsjzhushou.presenter.contract;
 
 import com.example.smile.cnsjzhushou.bean.AppInfo;
-import com.example.smile.cnsjzhushou.presenter.BasePresenter;
 import com.example.smile.cnsjzhushou.ui.BaseView;
 
 import java.util.List;
@@ -18,10 +17,6 @@ public interface RecommendContract {
         void showNoData();
         void showError(String message);
         void showResult(List<AppInfo> datas);
-    }
-
-    interface Presenter extends BasePresenter {
-        void requestDatas();
     }
 
 }

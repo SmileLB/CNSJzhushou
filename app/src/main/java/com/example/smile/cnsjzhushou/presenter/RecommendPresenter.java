@@ -5,6 +5,8 @@ import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.data.RecommendModel;
 import com.example.smile.cnsjzhushou.presenter.contract.RecommendContract;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,18 +17,14 @@ import retrofit2.Response;
  * describe:
  */
 
-public class RecommendPresenter implements RecommendContract.Presenter {
+public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendContract.View> {
 
-    public RecommendContract.View mView;
-
-    public RecommendModel mModel;
-
-    public RecommendPresenter(RecommendContract.View view,RecommendModel model) {
-        mView = view;
-        mModel = model;
+    @Inject
+    public RecommendPresenter(RecommendModel model, RecommendContract.View view) {
+        super(model, view);
     }
 
-    @Override
+
     public void requestDatas() {
         mView.showLoading();
         mModel.getApps(new Callback<PageBean<AppInfo>>() {

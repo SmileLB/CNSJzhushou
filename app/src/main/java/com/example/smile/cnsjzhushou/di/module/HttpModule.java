@@ -1,7 +1,13 @@
-package com.example.smile.cnsjzhushou.http;
+package com.example.smile.cnsjzhushou.di.module;
+
+import com.example.smile.cnsjzhushou.data.http.ApiService;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -10,13 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by LiBing
- * on 2017/6/18 0018
+ * on 2017/6/28 0028
  * describe:
  */
+@Module
+public class HttpModule {
 
-public class HttpManager {
-
-    public OkHttpClient getOkHttpClient(){
+    @Provides
+    @Singleton
+    public OkHttpClient providerOkHttpClient(){
         // log用拦截器
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
@@ -35,7 +43,9 @@ public class HttpManager {
                 .build();
     }
 
-    public Retrofit getRetrofit(OkHttpClient okHttpClient){
+    @Provides
+    @Singleton
+    public Retrofit providerRetrofit(OkHttpClient okHttpClient){
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(ApiService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -43,6 +53,12 @@ public class HttpManager {
                 .client(okHttpClient);
 
         return builder.build();
+    }
+
+    @Provides
+    @Singleton
+    public ApiService providerApiService(Retrofit retrofit){
+        return retrofit.create(ApiService.class);
     }
 
 }
