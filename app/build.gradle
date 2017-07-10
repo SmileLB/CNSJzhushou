@@ -55,4 +55,6 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'  //添加android缺失的部分javax注解
     //pathview
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
+    //sweetalertDialog
+    compile 'cn.pedant.sweetalert:library:1.3'
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.smile.cnsjzhushou.AppApplication;
 import com.example.smile.cnsjzhushou.di.component.AppComponent;
 import com.example.smile.cnsjzhushou.presenter.BasePresenter;
+import com.example.smile.cnsjzhushou.ui.BaseView;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ import butterknife.Unbinder;
  * describe:
  */
 
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
     private Unbinder mBind;
 
@@ -58,10 +59,24 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public abstract void init();
 
     @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void showError(String msg) {
+    }
+
+    @Override
+    public void dismissLoading() {
+    }
+
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mBind != mBind.EMPTY) {
             mBind.unbind();
         }
     }
+
 }

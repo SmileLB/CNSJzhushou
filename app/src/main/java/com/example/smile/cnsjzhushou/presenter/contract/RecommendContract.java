@@ -15,7 +15,6 @@ public interface RecommendContract {
 
     interface View extends BaseView {
         void showNoData();
-        void showError(String message);
         void showResult(List<AppInfo> datas);
     }
 

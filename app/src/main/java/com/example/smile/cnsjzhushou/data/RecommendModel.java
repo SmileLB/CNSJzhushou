@@ -1,10 +1,11 @@
 package com.example.smile.cnsjzhushou.data;
 
 import com.example.smile.cnsjzhushou.bean.AppInfo;
+import com.example.smile.cnsjzhushou.bean.BaseBean;
 import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.data.http.ApiService;
 
-import retrofit2.Callback;
+import rx.Observable;
 
 /**
  * Created by LiBing
@@ -21,10 +22,12 @@ public class RecommendModel {
         mApiService = apiService;
     }
 
-    public void getApps(Callback<PageBean<AppInfo>> callback){
+    public Observable<BaseBean<PageBean<AppInfo>>> getApps(){
 //        HttpManager manager=new HttpManager();
 //        ApiService apiService = manager.getRetrofit(manager.getOkHttpClient()).create(ApiService.class);
-        mApiService.getApps("{'page':0}").enqueue(callback);
+//        mApiService.getApps("{'page':0}").enqueue(callback);
+
+        return mApiService.getApps("{'page':0}");
     }
 
 }

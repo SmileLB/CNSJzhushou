@@ -1,6 +1,5 @@
 package com.example.smile.cnsjzhushou.ui.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,8 +19,6 @@ import com.example.smile.cnsjzhushou.ui.decoration.DividerItemDecoration;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 
 /**
@@ -29,13 +26,10 @@ import butterknife.BindView;
  * 推荐
  */
 
-public class RecommendFragment extends BaseFragment<RecommendPresenter> implements RecommendContract.View {
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements RecommendContract.View {
 
     @BindView(R.id.id_recycler_view)
     RecyclerView mRecyclerView;
-
-    @Inject
-    ProgressDialog mDialog;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -69,17 +63,9 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
         mRecyclerView.setAdapter(adapter);
     }
 
-
     @Override
-    public void showLoading() {
-        mDialog.show();
-    }
-
-    @Override
-    public void dismissLoading() {
-        if (mDialog.isShowing()) {
-            mDialog.dismiss();
-        }
+    public void onEmptyViewClick() {
+        mPresenter.requestDatas();
     }
 
     @Override
@@ -96,4 +82,6 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
     public void showResult(List<AppInfo> datas) {
         initRecyclerView(datas);
     }
+
+
 }

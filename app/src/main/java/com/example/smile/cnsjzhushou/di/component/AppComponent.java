@@ -1,5 +1,8 @@
 package com.example.smile.cnsjzhushou.di.component;
 
+import android.app.Application;
+
+import com.example.smile.cnsjzhushou.common.rx.RxErrorHandler;
 import com.example.smile.cnsjzhushou.data.http.ApiService;
 import com.example.smile.cnsjzhushou.di.module.AppModule;
 import com.example.smile.cnsjzhushou.di.module.HttpModule;
@@ -17,5 +20,10 @@ import dagger.Component;
 @Component(modules = {AppModule.class, HttpModule.class})
 public interface AppComponent {
 
-    ApiService getApiService();
+    public ApiService getApiService();
+
+    public Application getApplication();
+
+    public RxErrorHandler getRxErrorHandler();
+
 }
