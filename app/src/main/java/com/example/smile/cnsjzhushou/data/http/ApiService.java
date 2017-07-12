@@ -2,6 +2,7 @@ package com.example.smile.cnsjzhushou.data.http;
 
 import com.example.smile.cnsjzhushou.bean.AppInfo;
 import com.example.smile.cnsjzhushou.bean.BaseBean;
+import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.bean.requestbean.LoginRequestBean;
 
@@ -29,6 +30,14 @@ public interface ApiService {
 
     @GET("featured2")
     Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
+
+    @GET("index")
+    public  Observable<BaseBean<IndexBean>> index();
+
+    @GET("toplist")
+    public  Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
+
+
 
     @POST("login")
     public Observable<BaseBean> login(@Body LoginRequestBean bean);

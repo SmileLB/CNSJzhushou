@@ -1,9 +1,7 @@
 package com.example.smile.cnsjzhushou.presenter.contract;
 
-import com.example.smile.cnsjzhushou.bean.AppInfo;
+import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.ui.BaseView;
-
-import java.util.List;
 
 /**
  * Created by LiBing
@@ -14,8 +12,11 @@ import java.util.List;
 public interface RecommendContract {
 
     interface View extends BaseView {
-        void showNoData();
-        void showResult(List<AppInfo> datas);
+
+        void showResult(IndexBean indexBean);
+
+        void onRequestPermissonSuccess();
+        void onRequestPermissonError();
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.smile.cnsjzhushou.data;
 
 import com.example.smile.cnsjzhushou.bean.AppInfo;
 import com.example.smile.cnsjzhushou.bean.BaseBean;
+import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.data.http.ApiService;
 
@@ -30,4 +31,11 @@ public class RecommendModel {
         return mApiService.getApps("{'page':0}");
     }
 
+    public Observable<BaseBean<IndexBean>> index(){
+        return  mApiService.index();
+    }
+
+    public  Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
+        return  mApiService.topList(page);
+    }
 }

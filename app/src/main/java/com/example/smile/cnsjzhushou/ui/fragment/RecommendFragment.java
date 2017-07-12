@@ -8,16 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.smile.cnsjzhushou.R;
-import com.example.smile.cnsjzhushou.bean.AppInfo;
+import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.di.component.AppComponent;
 import com.example.smile.cnsjzhushou.di.component.DaggerRemmendComponent;
 import com.example.smile.cnsjzhushou.di.module.RemmendModule;
 import com.example.smile.cnsjzhushou.presenter.RecommendPresenter;
 import com.example.smile.cnsjzhushou.presenter.contract.RecommendContract;
-import com.example.smile.cnsjzhushou.ui.adapter.RecommendAdapter;
-import com.example.smile.cnsjzhushou.ui.decoration.DividerItemDecoration;
-
-import java.util.List;
+import com.example.smile.cnsjzhushou.ui.adapter.IndexMultipleAdapter;
 
 import butterknife.BindView;
 
@@ -30,6 +27,8 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @BindView(R.id.id_recycler_view)
     RecyclerView mRecyclerView;
+
+    private IndexMultipleAdapter mAdatper;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -51,16 +50,16 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public void init() {
+        initRecyclerView();
         mPresenter.requestDatas();
+//        mPresenter.requestPermissions();
     }
 
-    private void initRecyclerView(List<AppInfo> data) {
-        RecommendAdapter adapter = new RecommendAdapter(getActivity(), data);
+    private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //为RecyclerView设置分割线(这个可以对DividerItemDecoration进行修改，自定义)
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -69,19 +68,24 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     }
 
     @Override
-    public void showNoData() {
-        Toast.makeText(getActivity(), "没有获取到数据", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showError(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showResult(List<AppInfo> datas) {
-        initRecyclerView(datas);
+    public void showResult(IndexBean indexBean) {
+        mAdatper = new IndexMultipleAdapter(getActivity());
+        mAdatper.setData(indexBean);
+        mRecyclerView.setAdapter(mAdatper);
     }
 
+    @Override
+    public void onRequestPermissonSuccess() {
 
+    }
+
+    @Override
+    public void onRequestPermissonError() {
+        Toast.makeText(getActivity(),"你已拒绝授权",Toast.LENGTH_LONG).show();
+    }
 }
