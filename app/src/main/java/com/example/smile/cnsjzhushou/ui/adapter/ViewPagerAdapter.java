@@ -5,12 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.smile.cnsjzhushou.ui.bean.FragmentInfo;
-import com.example.smile.cnsjzhushou.ui.fragment.CategoryFragment;
-import com.example.smile.cnsjzhushou.ui.fragment.GamesFragment;
-import com.example.smile.cnsjzhushou.ui.fragment.TopListFragment;
-import com.example.smile.cnsjzhushou.ui.fragment.RecommendFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,24 +14,18 @@ import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<FragmentInfo> mFragments=new ArrayList<FragmentInfo>();
+    private List<FragmentInfo> mFragments;
 
-    public ViewPagerAdapter(FragmentManager fm) {
+    public ViewPagerAdapter(FragmentManager fm, List<FragmentInfo> mFragments) {
         super(fm);
-        initFragments();
-    }
-
-    private void initFragments() {
-        mFragments.add(new FragmentInfo("推荐",RecommendFragment.class));
-        mFragments.add(new FragmentInfo ("排行", TopListFragment.class));
-        mFragments.add(new FragmentInfo ("游戏", GamesFragment.class));
-        mFragments.add(new FragmentInfo ("分类", CategoryFragment.class));
+        this.mFragments = mFragments;
+        // initFragments();
     }
 
     @Override
     public Fragment getItem(int position) {
         try {
-            return (Fragment)mFragments.get(position).getFragment().newInstance();
+            return (Fragment) mFragments.get(position).getFragment().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

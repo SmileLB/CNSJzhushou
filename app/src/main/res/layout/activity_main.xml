@@ -8,43 +8,55 @@
     android:layout_height="match_parent"
     tools:context="com.example.smile.cnsjzhushou.ui.activity.MainActivity">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:title="@string/app_name"
-            android:theme="@style/AppTheme.ToolBar">
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        </android.support.v7.widget.Toolbar>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/AppTheme.ToolBar"
+                app:title="@string/app_name"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabMode="fixed">
+            </android.support.v7.widget.Toolbar>
 
-        </android.support.design.widget.TabLayout>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="fixed"
+                >
+
+            </android.support.design.widget.TabLayout>
+
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </android.support.v4.view.ViewPager>
 
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/drawer_navigation"
-        android:layout_width="320dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         app:headerLayout="@layout/header_layout"

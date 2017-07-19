@@ -2,17 +2,23 @@ package com.example.smile.cnsjzhushou.data.http;
 
 import com.example.smile.cnsjzhushou.bean.AppInfo;
 import com.example.smile.cnsjzhushou.bean.BaseBean;
+import com.example.smile.cnsjzhushou.bean.Category;
 import com.example.smile.cnsjzhushou.bean.IndexBean;
+import com.example.smile.cnsjzhushou.bean.LoginBean;
 import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.bean.requestbean.LoginRequestBean;
 
+import java.util.List;
+
+import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
+
 
 /**
  * Created by LiBing
@@ -37,10 +43,51 @@ public interface ApiService {
     @GET("toplist")
     public  Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
 
-
+    @GET("game")
+    public  Observable<BaseBean<PageBean<AppInfo>>> games(@Query("page") int page);
 
     @POST("login")
-    public Observable<BaseBean> login(@Body LoginRequestBean bean);
+    Observable<BaseBean<LoginBean>> login(@Body LoginRequestBean param);
+
+    @GET("category")
+    Observable<BaseBean<List<Category>>> getCategories();
+
+    @GET("category/featured/{categoryid}")
+    Observable<BaseBean<PageBean<AppInfo>>> getFeaturedAppsByCategory(@Path("categoryid") int categoryid, @Query("page") int page);
+
+    @GET("category/toplist/{categoryid}")
+    Observable<BaseBean<PageBean<AppInfo>>> getTopListAppsByCategory(@Path("categoryid") int categoryid,@Query("page") int page);
+
+    @GET("category/newlist/{categoryid}")
+    Observable<BaseBean<PageBean<AppInfo>>> getNewListAppsByCategory(@Path("categoryid") int categoryid,@Query("page") int page);
+
+    @GET("app/{id}")
+    Observable<BaseBean<AppInfo>> getAppDetail(@Path("id") int id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //    public static final MediaType JSON
 //            = MediaType.parse("application/json; charset=utf-8");
 //    OkHttpClient client = new OkHttpClient();

@@ -3,8 +3,8 @@ package com.example.smile.cnsjzhushou.presenter;
 import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.common.rx.RxHttpReponseCompat;
 import com.example.smile.cnsjzhushou.common.rx.subscriber.ProgressSubcriber;
-import com.example.smile.cnsjzhushou.data.RecommendModel;
-import com.example.smile.cnsjzhushou.presenter.contract.RecommendContract;
+import com.example.smile.cnsjzhushou.data.AppInfoModel;
+import com.example.smile.cnsjzhushou.presenter.contract.AppInfoContract;
 
 import javax.inject.Inject;
 
@@ -14,10 +14,10 @@ import javax.inject.Inject;
  * describe:
  */
 
-public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendContract.View> {
+public class RecommendPresenter extends BasePresenter<AppInfoModel, AppInfoContract.View> {
 
     @Inject
-    public RecommendPresenter(RecommendModel model, RecommendContract.View view) {
+    public RecommendPresenter(AppInfoModel model, AppInfoContract.View view) {
         super(model, view);
     }
 

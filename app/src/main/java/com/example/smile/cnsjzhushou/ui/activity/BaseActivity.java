@@ -26,7 +26,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     private Unbinder mBind;
 
-    private AppApplication mApplication;
+    protected AppApplication mApplication;
 
     @Inject
     T mPresenter;

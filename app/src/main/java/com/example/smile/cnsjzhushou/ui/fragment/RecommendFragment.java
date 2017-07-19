@@ -13,7 +13,7 @@ import com.example.smile.cnsjzhushou.di.component.AppComponent;
 import com.example.smile.cnsjzhushou.di.component.DaggerRemmendComponent;
 import com.example.smile.cnsjzhushou.di.module.RemmendModule;
 import com.example.smile.cnsjzhushou.presenter.RecommendPresenter;
-import com.example.smile.cnsjzhushou.presenter.contract.RecommendContract;
+import com.example.smile.cnsjzhushou.presenter.contract.AppInfoContract;
 import com.example.smile.cnsjzhushou.ui.adapter.IndexMultipleAdapter;
 
 import butterknife.BindView;
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * 推荐
  */
 
-public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements RecommendContract.View {
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements AppInfoContract.View {
 
     @BindView(R.id.id_recycler_view)
     RecyclerView mRecyclerView;
@@ -38,7 +38,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public int setLayout() {
-        return R.layout.fragment_recomend;
+        return R.layout.template_recycler_view;
     }
 
     @Override

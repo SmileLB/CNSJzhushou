@@ -1,14 +1,12 @@
 package com.example.smile.cnsjzhushou.bean;
 
-import java.io.Serializable;
-
 /**
  * Created by LiBing
  * on 2017/7/4 0004
  * describe:
  */
 
-public class BaseBean<T> implements Serializable {
+public class BaseBean<T> extends BaseEntity {
 
     public static final int SUCCESS=1;
 

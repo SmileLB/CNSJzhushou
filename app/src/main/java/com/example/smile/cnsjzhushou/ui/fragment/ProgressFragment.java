@@ -36,15 +36,15 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
 
     private Unbinder mUnbinder;
 
-    private AppApplication mApplication;
+    protected AppApplication mApplication;
 
     @Inject
-    T mPresenter ;
+    T mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = (FrameLayout) inflater.inflate(R.layout.fragment_progress,container,false);
+        mRootView = (FrameLayout) inflater.inflate(R.layout.fragment_progress, container, false);
         mViewProgress = mRootView.findViewById(R.id.view_progress);
         mViewContent = (FrameLayout) mRootView.findViewById(R.id.view_content);
         mViewEmpty = mRootView.findViewById(R.id.view_empty);
@@ -74,53 +74,52 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     }
 
     private void setRealContentView() {
-        View realContentView=  LayoutInflater.from(getActivity()).inflate(setLayout(),mViewContent,true);
-        mUnbinder=  ButterKnife.bind(this, realContentView);
+        View realContentView = LayoutInflater.from(getActivity()).inflate(setLayout(), mViewContent, true);
+        mUnbinder = ButterKnife.bind(this, realContentView);
     }
 
-    public void  showProgressView(){
+    public void showProgressView() {
         showView(R.id.view_progress);
     }
 
-    public void showContentView(){
+    public void showContentView() {
         showView(R.id.view_content);
     }
 
-    public void showEmptyView(){
+    public void showEmptyView() {
         showView(R.id.view_empty);
     }
 
-    public void showEmptyView(int resId){
+    public void showEmptyView(int resId) {
         showEmptyView();
         mTextError.setText(resId);
     }
 
-    public void showEmptyView(String msg){
+    public void showEmptyView(String msg) {
         showEmptyView();
         mTextError.setText(msg);
     }
 
-    public void showView(int viewId){
+    public void showView(int viewId) {
 
-        for(int i=0;i<mRootView.getChildCount();i++){
+        for (int i = 0; i < mRootView.getChildCount(); i++) {
 
-            if( mRootView.getChildAt(i).getId() == viewId){
+            if (mRootView.getChildAt(i).getId() == viewId) {
 
                 mRootView.getChildAt(i).setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 mRootView.getChildAt(i).setVisibility(View.GONE);
             }
         }
     }
 
-    public void onEmptyViewClick(){
+    public void onEmptyViewClick() {
 
     }
 
-    public abstract  void setupFragmentComponent(AppComponent appComponent);
+    public abstract void setupFragmentComponent(AppComponent appComponent);
 
-    public abstract void  init();
+    public abstract void init();
 
     @Override
     public void showLoading() {
@@ -143,7 +142,7 @@ public abstract class ProgressFragment<T extends BasePresenter> extends Fragment
     public void onDestroy() {
         super.onDestroy();
 
-        if(mUnbinder != Unbinder.EMPTY){
+        if (mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
     }

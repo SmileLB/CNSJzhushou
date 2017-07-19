@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.smile.cnsjzhushou.common.util.ProgressDialogHandler;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by LiBing
  * on 2017/7/8 0008
@@ -13,6 +15,8 @@ import com.example.smile.cnsjzhushou.common.util.ProgressDialogHandler;
 public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber<T> implements ProgressDialogHandler.OnProgressCancelListener {
 
     private ProgressDialogHandler mProgressDialogHandler;
+
+    private Disposable mDisposable;
 
     public ProgressDialogSubscriber(Context context) {
         super(context);
@@ -26,18 +30,18 @@ public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber
 
     @Override
     public void onCancelProgress() {
-        unsubscribe();
+        mDisposable.dispose();
     }
 
-    @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
+        mDisposable = d;
         if(isShowProgressDialog()){
             this.mProgressDialogHandler.showProgressDialog();
         }
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         if(isShowProgressDialog()){
             this.mProgressDialogHandler.dismissProgressDialog();
         }

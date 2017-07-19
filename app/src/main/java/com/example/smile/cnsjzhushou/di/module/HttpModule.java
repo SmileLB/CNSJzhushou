@@ -2,7 +2,6 @@ package com.example.smile.cnsjzhushou.di.module;
 
 import android.app.Application;
 
-import com.example.smile.cnsjzhushou.BuildConfig;
 import com.example.smile.cnsjzhushou.common.http.CommonParamsInterceptor;
 import com.example.smile.cnsjzhushou.common.rx.RxErrorHandler;
 import com.example.smile.cnsjzhushou.data.http.ApiService;
@@ -15,9 +14,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -56,7 +54,8 @@ public class HttpModule {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        if (BuildConfig.DEBUG) {
+
+        /*if(BuildConfig.DEBUG){
             // log用拦截器
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
@@ -65,7 +64,7 @@ public class HttpModule {
 
             builder.addInterceptor(logging);
 
-        }
+        }*/
         // 如果使用到HTTPS，我们需要创建SSLSocketFactory，并设置到client
 //        SSLSocketFactory sslSocketFactory = null;
         return builder
@@ -84,7 +83,7 @@ public class HttpModule {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(ApiService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient);
 
         return builder.build();

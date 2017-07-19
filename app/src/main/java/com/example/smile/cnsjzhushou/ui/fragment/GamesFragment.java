@@ -1,25 +1,33 @@
 package com.example.smile.cnsjzhushou.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.smile.cnsjzhushou.R;
+import com.example.smile.cnsjzhushou.di.component.AppComponent;
+import com.example.smile.cnsjzhushou.di.component.DaggerAppInfoComponent;
+import com.example.smile.cnsjzhushou.di.module.AppInfoModule;
+import com.example.smile.cnsjzhushou.presenter.AppInfoPresenter;
+import com.example.smile.cnsjzhushou.ui.adapter.AppInfoAdapter;
 
 /**
  * Created by Administrator on 2017/6/17 0017.
  */
 
-public class GamesFragment extends Fragment {
-    @Nullable
+public class GamesFragment extends BaseAppInfoFragment {
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public AppInfoAdapter buildAdapter() {
+        return AppInfoAdapter.builder().showPosition(false).showBrief(true).showCategoryName(true).build();
+    }
 
+    @Override
+    public int type() {
+        return AppInfoPresenter.GAME;
+    }
 
-        View view = inflater.inflate(R.layout.fragment_games, container, false);
-        return view;
+    @Override
+    public void setupFragmentComponent(AppComponent appComponent) {
+        DaggerAppInfoComponent.builder()
+                .appComponent(appComponent)
+                .appInfoModule(new AppInfoModule(this))
+                .build()
+                .injectGamesFragment(this);
     }
 }

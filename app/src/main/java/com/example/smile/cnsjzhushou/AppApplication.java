@@ -2,6 +2,7 @@ package com.example.smile.cnsjzhushou;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
 
 import com.example.smile.cnsjzhushou.di.component.AppComponent;
 import com.example.smile.cnsjzhushou.di.component.DaggerAppComponent;
@@ -19,6 +20,8 @@ public class AppApplication extends Application{
 
     private AppComponent mAppComponent;
 
+    private View mView;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +30,14 @@ public class AppApplication extends Application{
                 .appModule(new AppModule(this))
                 .httpModule(new HttpModule())
                 .build();
+    }
+
+    public View getView() {
+        return mView;
+    }
+
+    public void setView(View view) {
+        mView = view;
     }
 
     public static AppApplication get(Context context){

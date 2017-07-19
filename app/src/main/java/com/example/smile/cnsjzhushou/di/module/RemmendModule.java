@@ -2,9 +2,9 @@ package com.example.smile.cnsjzhushou.di.module;
 
 import android.app.ProgressDialog;
 
-import com.example.smile.cnsjzhushou.data.RecommendModel;
+import com.example.smile.cnsjzhushou.data.AppInfoModel;
 import com.example.smile.cnsjzhushou.data.http.ApiService;
-import com.example.smile.cnsjzhushou.presenter.contract.RecommendContract;
+import com.example.smile.cnsjzhushou.presenter.contract.AppInfoContract;
 import com.example.smile.cnsjzhushou.ui.fragment.RecommendFragment;
 
 import dagger.Module;
@@ -18,24 +18,24 @@ import dagger.Provides;
 @Module
 public class RemmendModule {
 
-    private RecommendContract.View mView;
+    private AppInfoContract.View mView;
 
-    public RemmendModule(RecommendContract.View view) {
+    public RemmendModule(AppInfoContract.View view) {
         this.mView = view;
     }
 
     @Provides
-    public RecommendContract.View provideView(){
+    public AppInfoContract.View provideView(){
         return mView;
     }
 
     @Provides
-    public RecommendModel provideModel(ApiService service){
-        return new RecommendModel(service);
+    public AppInfoModel provideModel(ApiService service){
+        return new AppInfoModel(service);
     }
 
     @Provides
-    public ProgressDialog provideProgressDialog(RecommendContract.View view){
+    public ProgressDialog provideProgressDialog(AppInfoContract.View view){
         return new ProgressDialog(((RecommendFragment)view).getActivity());
     }
 }

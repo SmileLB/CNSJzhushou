@@ -6,7 +6,8 @@ import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.data.http.ApiService;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 /**
  * Created by LiBing
@@ -14,12 +15,12 @@ import rx.Observable;
  * describe:排行界面的model
  */
 
-public class RecommendModel {
+public class AppInfoModel {
 
 
     private ApiService mApiService;
 
-    public RecommendModel(ApiService apiService) {
+    public AppInfoModel(ApiService apiService) {
         mApiService = apiService;
     }
 
@@ -38,4 +39,28 @@ public class RecommendModel {
     public  Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
         return  mApiService.topList(page);
     }
+
+    public  Observable<BaseBean<PageBean<AppInfo>>> games(int page){
+        return  mApiService.games(page);
+    }
+    public Observable<BaseBean<PageBean<AppInfo>>> getFeaturedAppsByCategory( int categoryid,  int page){
+
+        return  mApiService.getFeaturedAppsByCategory(categoryid,page);
+    }
+
+    public Observable<BaseBean<PageBean<AppInfo>>> getTopListAppsByCategory( int categoryid, int page){
+
+        return  mApiService.getTopListAppsByCategory(categoryid,page);
+    }
+
+    public Observable<BaseBean<PageBean<AppInfo>>> getNewListAppsByCategory( int categoryid, int page){
+
+        return  mApiService.getNewListAppsByCategory(categoryid,page);
+    }
+
+    public Observable<BaseBean<AppInfo>> getAppDetail( int id){
+
+        return  mApiService.getAppDetail(id);
+    }
+
 }
