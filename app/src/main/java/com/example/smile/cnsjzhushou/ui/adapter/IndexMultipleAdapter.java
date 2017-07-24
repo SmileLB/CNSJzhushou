@@ -1,6 +1,7 @@
 package com.example.smile.cnsjzhushou.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import com.example.smile.cnsjzhushou.R;
 import com.example.smile.cnsjzhushou.bean.Banner;
 import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.common.imageloader.ImageLoader;
+import com.example.smile.cnsjzhushou.ui.activity.HotAppActivity;
+import com.example.smile.cnsjzhushou.ui.activity.SubjectActivity;
 import com.example.smile.cnsjzhushou.ui.decoration.DividerItemDecoration;
 import com.example.smile.cnsjzhushou.ui.widget.BannerLayout;
 
@@ -24,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import zlc.season.rxdownload2.RxDownload;
 
 /**
  * Created by LiBing
@@ -45,8 +49,11 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private Context mContext;
 
-    public IndexMultipleAdapter(Context context) {
+    private RxDownload mRxDownload;
+
+    public IndexMultipleAdapter(Context context, RxDownload rxDownload) {
         mContext = context;
+        this.mRxDownload = rxDownload;
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -106,7 +113,12 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else {
             AppViewHolder viewHolder = (AppViewHolder) holder;
 
-            AppInfoAdapter appInfoAdapter =AppInfoAdapter.builder().showBrief(true).showCategoryName(false).showPosition(false).build();
+            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder()
+                    .showBrief(true)
+                    .showCategoryName(false)
+                    .showPosition(false)
+                    .rxDownload(mRxDownload)
+                    .build();
 
             if(viewHolder.type==TYPE_APPS){
                 viewHolder.mText.setText("热门应用");
@@ -149,7 +161,13 @@ public class IndexMultipleAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.layout_hot_app){
+            mContext.startActivity(new Intent(mContext, HotAppActivity.class));
+        }
+        else if(v.getId() == R.id.layout_hot_subject){
 
+            mContext.startActivity(new Intent(mContext, SubjectActivity.class));
+        }
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {

@@ -75,8 +75,12 @@
             android:layout_marginTop="30dp"
             app:textColor="@color/color_w"
             android:background="@drawable/bg_btn"
+            app:text="@string/login"
             app:loadingText="正在登录"
             app:progressColor="@color/colorAccent"/>
+
+
+
 
 
     </LinearLayout>

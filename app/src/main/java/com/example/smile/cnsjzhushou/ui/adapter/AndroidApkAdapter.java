@@ -47,7 +47,6 @@ public class AndroidApkAdapter extends BaseQuickAdapter<AndroidApk, BaseViewHold
             btn.setTag(R.id.tag_package_name, item.getPackageName());
             btn.setText("删除");
             RxView.clicks(btn).subscribe(new Consumer<Object>() {
-
                 @Override
                 public void accept(@NonNull Object o) throws Exception {
                     if (btn.getTag(R.id.tag_package_name).toString().equals(item.getPackageName())) {
@@ -66,21 +65,20 @@ public class AndroidApkAdapter extends BaseQuickAdapter<AndroidApk, BaseViewHold
                 }
             });
 
-            isInstalled(mContext, item.getPackageName()).subscribe(new Consumer<Boolean>() {
-
-                @Override
-                public void accept(@NonNull Boolean aBoolean) throws Exception {
-                    btn.setTag(aBoolean);
-
-                    if (aBoolean) {
-                        txtStatus.setText("已安装");
-                        btn.setText("删除");
-                    } else {
-                        txtStatus.setText("等待安装");
-                        btn.setText("安装");
-                    }
-                }
-            });
+            isInstalled(mContext, item.getPackageName())
+                    .subscribe(new Consumer<Boolean>() {
+                        @Override
+                        public void accept(@NonNull Boolean aBoolean) throws Exception {
+                            btn.setTag(aBoolean);
+                            if (aBoolean) {
+                                txtStatus.setText("已安装");
+                                btn.setText("删除");
+                            } else {
+                                txtStatus.setText("等待安装");
+                                btn.setText("安装");
+                            }
+                        }
+                    });
 
         } else if (flag == FLAG_APP) {
             btn.setText("卸载");

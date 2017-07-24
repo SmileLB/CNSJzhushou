@@ -7,10 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.smile.cnsjzhushou.R;
+import com.example.smile.cnsjzhushou.common.Constant;
 import com.example.smile.cnsjzhushou.di.component.AppComponent;
 import com.example.smile.cnsjzhushou.ui.adapter.ViewPagerAdapter;
 import com.example.smile.cnsjzhushou.ui.bean.FragmentInfo;
+import com.example.smile.cnsjzhushou.ui.fragment.DownloadedFragment;
 import com.example.smile.cnsjzhushou.ui.fragment.DownloadingFragment;
+import com.example.smile.cnsjzhushou.ui.fragment.InstalledAppAppFragment;
+import com.example.smile.cnsjzhushou.ui.fragment.UpgradeAppFragment;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.ionicons_typeface_library.Ionicons;
 
@@ -29,6 +33,8 @@ public class AppManagerActivity extends BaseActivity {
 
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
+
+    private  int position;
 
     private void initToolbar() {
         mToolbar.setNavigationIcon(
@@ -61,6 +67,7 @@ public class AppManagerActivity extends BaseActivity {
 
     @Override
     public void init() {
+        position = getIntent().getIntExtra(Constant.POSITION,0);
         initToolbar();
         initTablayout();
     }
@@ -70,14 +77,16 @@ public class AppManagerActivity extends BaseActivity {
         mViewPager.setOffscreenPageLimit(adapter.getCount());
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(position);
+        mTabLayout.getTabAt(position).select();
     }
 
     private List<FragmentInfo> initFragments(){
         List<FragmentInfo> mFragments = new ArrayList<>(4);
         mFragments.add(new FragmentInfo("下载",DownloadingFragment.class));
-//        mFragments.add(new FragmentInfo ("排行", TopListFragment.class));
-//        mFragments.add(new FragmentInfo ("游戏", GamesFragment.class));
-//        mFragments.add(new FragmentInfo ("分类", CategoryFragment.class));
+        mFragments.add(new FragmentInfo ("已完成", DownloadedFragment.class));
+        mFragments.add(new FragmentInfo ("升级", UpgradeAppFragment.class));
+        mFragments.add(new FragmentInfo ("已安装", InstalledAppAppFragment.class));
         return  mFragments;
     }
 }

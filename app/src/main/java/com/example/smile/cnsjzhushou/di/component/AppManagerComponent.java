@@ -3,8 +3,7 @@ package com.example.smile.cnsjzhushou.di.component;
 
 import com.example.smile.cnsjzhushou.di.FragmentScope;
 import com.example.smile.cnsjzhushou.di.module.AppManagerModule;
-import com.example.smile.cnsjzhushou.ui.fragment.DownloadedFragment;
-import com.example.smile.cnsjzhushou.ui.fragment.DownloadingFragment;
+import com.example.smile.cnsjzhushou.ui.fragment.AppManangerFragment;
 
 import dagger.Component;
 
@@ -13,7 +12,9 @@ import dagger.Component;
 @Component(modules = AppManagerModule.class,dependencies = AppComponent.class)
 public interface AppManagerComponent {
 
-    void inject(DownloadingFragment fragment);
-    void injectDownloaded(DownloadedFragment fragment);
+    void inject(AppManangerFragment fragment);
 
+//    void inject(DownloadingFragment fragment);
+//    void injectDownloaded(DownloadedFragment fragment);
+//    void injectInstalled(InstalledAppAppFragment fragment);
 }

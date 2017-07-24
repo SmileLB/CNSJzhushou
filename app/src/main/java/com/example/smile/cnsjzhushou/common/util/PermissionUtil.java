@@ -4,10 +4,12 @@ import android.content.Context;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import io.reactivex.Observable;
+
 
 public class PermissionUtil {
 
-    public static io.reactivex.Observable<Boolean> requestPermisson(Context activity, String permission){
+    public static Observable<Boolean> requestPermisson(Context activity, String permission){
 
         RxPermissions rxPermissions =  RxPermissions.getInstance(activity);
 

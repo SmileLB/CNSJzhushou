@@ -63,4 +63,8 @@ public class AppInfoModel {
         return  mApiService.getAppDetail(id);
     }
 
+    public Observable<BaseBean<PageBean<AppInfo>>> getHotApps(int page){
+        return  mApiService.getHotApps(page);
+    }
+
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.smile.cnsjzhushou.AppApplication;
 import com.example.smile.cnsjzhushou.di.component.AppComponent;
 import com.example.smile.cnsjzhushou.presenter.BasePresenter;
+import com.example.smile.cnsjzhushou.ui.BaseView;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import butterknife.Unbinder;
  * describe:
  */
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
 
     private Unbinder mBind;
 
@@ -57,6 +58,21 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     public abstract void init();
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
 
     @Override
     protected void onDestroy() {

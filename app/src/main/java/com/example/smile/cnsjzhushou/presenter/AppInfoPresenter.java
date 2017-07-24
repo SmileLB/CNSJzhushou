@@ -30,6 +30,7 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
     public static final int FEATURED = 0;
     public static final int TOPLIST = 1;
     public static final int NEWLIST = 2;
+    public static final int HOT_APP_LIST = 3;
 
     @Inject
     public AppInfoPresenter(AppInfoModel model, AppInfoContract.AppInfoView view) {
@@ -37,14 +38,14 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
     }
 
     public void requestData(int type, int page) {
-        request(type,page,0,0);
+        request(type, page, 0, 0);
     }
 
-    public void requestCategoryApps(int categoryId,int page,int flagType){
-        request(CATEGORY,page,categoryId,flagType);
+    public void requestCategoryApps(int categoryId, int page, int flagType) {
+        request(CATEGORY, page, categoryId, flagType);
     }
 
-    public void request(int type, int page,int categoryId,int flagType) {
+    public void request(int type, int page, int categoryId, int flagType) {
 
         Observer subscriber = null;
         if (page == 0) {
@@ -68,14 +69,14 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
             };
         }
 
-        Observable observable = getObservable(type, page,categoryId,flagType);
+        Observable observable = getObservable(type, page, categoryId, flagType);
 
         observable
                 .compose(RxHttpReponseCompat.<PageBean<AppInfo>>compatResult())
                 .subscribe(subscriber);
     }
 
-    private Observable<BaseBean<PageBean<AppInfo>>> getObservable(int type, int page,int categoryId,int flagType) {
+    private Observable<BaseBean<PageBean<AppInfo>>> getObservable(int type, int page, int categoryId, int flagType) {
         switch (type) {
             case TOP_LIST:
                 return mModel.topList(page);
@@ -88,6 +89,8 @@ public class AppInfoPresenter extends BasePresenter<AppInfoModel, AppInfoContrac
                     return mModel.getTopListAppsByCategory(categoryId, page);
                 } else if (flagType == NEWLIST) {
                     return mModel.getNewListAppsByCategory(categoryId, page);
+                } else if (flagType == HOT_APP_LIST) {
+                    return mModel.getHotApps(page);
                 }
             default:
                 return Observable.empty();

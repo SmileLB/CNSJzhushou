@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.smile.cnsjzhushou.common.Constant;
 import com.example.smile.cnsjzhushou.common.apkparset.AndroidApk;
 import com.example.smile.cnsjzhushou.common.util.ACache;
+import com.example.smile.cnsjzhushou.common.util.AppUtils;
 import com.example.smile.cnsjzhushou.presenter.contract.AppManagerContract;
 
 import java.io.File;
@@ -48,6 +49,17 @@ public class AppManagerModel implements AppManagerContract.IAppManagerModel {
             @Override
             public void subscribe(ObservableEmitter<List<AndroidApk>> e) throws Exception {
                 e.onNext(scanApks(dir));
+                e.onComplete();
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<AndroidApk>> getInstalledApps() {
+        return Observable.create(new ObservableOnSubscribe<List<AndroidApk>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AndroidApk>> e) throws Exception {
+                e.onNext(AppUtils.getInstalledApps(mContext));
                 e.onComplete();
             }
         });

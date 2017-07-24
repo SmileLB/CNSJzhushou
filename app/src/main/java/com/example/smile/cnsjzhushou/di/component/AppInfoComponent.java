@@ -2,9 +2,7 @@ package com.example.smile.cnsjzhushou.di.component;
 
 import com.example.smile.cnsjzhushou.di.FragmentScope;
 import com.example.smile.cnsjzhushou.di.module.AppInfoModule;
-import com.example.smile.cnsjzhushou.ui.fragment.CategoryAppFragment;
-import com.example.smile.cnsjzhushou.ui.fragment.GamesFragment;
-import com.example.smile.cnsjzhushou.ui.fragment.TopListFragment;
+import com.example.smile.cnsjzhushou.ui.fragment.BaseAppInfoFragment;
 
 import dagger.Component;
 
@@ -17,10 +15,13 @@ import dagger.Component;
 @Component(modules = AppInfoModule.class,dependencies = AppComponent.class)
 public interface AppInfoComponent {
 
-    void injectTopListFragment(TopListFragment fragment);
+    void injectTopListFragment(BaseAppInfoFragment fragment);
 
-    void injectGamesFragment(GamesFragment fragment);
 
-    void injectCategoryAppFragment(CategoryAppFragment fragment);
+//    void injectTopListFragment(TopListFragment fragment);
+//
+//    void injectGamesFragment(GamesFragment fragment);
+//
+//    void injectCategoryAppFragment(CategoryAppFragment fragment);
 
 }

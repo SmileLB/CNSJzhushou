@@ -1,8 +1,5 @@
 package com.example.smile.cnsjzhushou.ui.fragment;
 
-import com.example.smile.cnsjzhushou.di.component.AppComponent;
-import com.example.smile.cnsjzhushou.di.component.DaggerAppInfoComponent;
-import com.example.smile.cnsjzhushou.di.module.AppInfoModule;
 import com.example.smile.cnsjzhushou.presenter.AppInfoPresenter;
 import com.example.smile.cnsjzhushou.ui.adapter.AppInfoAdapter;
 
@@ -22,12 +19,5 @@ public class GamesFragment extends BaseAppInfoFragment {
         return AppInfoPresenter.GAME;
     }
 
-    @Override
-    public void setupFragmentComponent(AppComponent appComponent) {
-        DaggerAppInfoComponent.builder()
-                .appComponent(appComponent)
-                .appInfoModule(new AppInfoModule(this))
-                .build()
-                .injectGamesFragment(this);
-    }
+
 }

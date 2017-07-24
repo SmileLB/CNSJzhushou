@@ -6,6 +6,9 @@ import com.example.smile.cnsjzhushou.bean.Category;
 import com.example.smile.cnsjzhushou.bean.IndexBean;
 import com.example.smile.cnsjzhushou.bean.LoginBean;
 import com.example.smile.cnsjzhushou.bean.PageBean;
+import com.example.smile.cnsjzhushou.bean.SearchResult;
+import com.example.smile.cnsjzhushou.bean.Subject;
+import com.example.smile.cnsjzhushou.bean.SubjectDetail;
 import com.example.smile.cnsjzhushou.bean.requestbean.LoginRequestBean;
 
 import java.util.List;
@@ -65,7 +68,25 @@ public interface ApiService {
     Observable<BaseBean<AppInfo>> getAppDetail(@Path("id") int id);
 
 
+    @GET("apps/updateinfo")
+    Observable<BaseBean<List<AppInfo>>> getAppsUpdateinfo(@Query("packageName") String packageName,@Query("versionCode") String versionCode);
 
+    @GET("app/hot")
+    Observable<BaseBean<PageBean<AppInfo>>> getHotApps(@Query("page") int page);
+
+    @GET("subject/hot")
+    Observable<BaseBean<PageBean<Subject>>> subjects(@Query("page") int page);
+
+    @GET("subject/{id}")
+    Observable<BaseBean<SubjectDetail>> subjectDetail(@Path("id") int id);
+
+
+    @GET("search/suggest")
+    Observable<BaseBean<List<String>>> searchSuggest(@Query("keyword") String keyword);
+
+
+    @GET("search")
+    Observable<BaseBean<SearchResult>> search(@Query("keyword") String keyword);
 
 
 

@@ -2,9 +2,6 @@ package com.example.smile.cnsjzhushou.ui.fragment;
 
 import android.annotation.SuppressLint;
 
-import com.example.smile.cnsjzhushou.di.component.AppComponent;
-import com.example.smile.cnsjzhushou.di.component.DaggerAppInfoComponent;
-import com.example.smile.cnsjzhushou.di.module.AppInfoModule;
 import com.example.smile.cnsjzhushou.ui.adapter.AppInfoAdapter;
 
 /**
@@ -41,12 +38,5 @@ public class CategoryAppFragment extends BaseAppInfoFragment{
         return 0;
     }
 
-    @Override
-    public void setupFragmentComponent(AppComponent appComponent) {
-        DaggerAppInfoComponent.builder()
-                .appComponent(appComponent)
-                .appInfoModule(new AppInfoModule(this))
-                .build()
-                .injectCategoryAppFragment(this);
-    }
+
 }

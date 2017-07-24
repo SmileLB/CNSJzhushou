@@ -4,7 +4,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.smile.cnsjzhushou.R;
+import com.example.smile.cnsjzhushou.bean.AppInfo;
 import com.example.smile.cnsjzhushou.common.apkparset.AndroidApk;
+import com.example.smile.cnsjzhushou.di.component.AppComponent;
+import com.example.smile.cnsjzhushou.di.component.DaggerAppManagerComponent;
+import com.example.smile.cnsjzhushou.di.module.AppManagerModule;
 import com.example.smile.cnsjzhushou.presenter.AppManagerPresenter;
 import com.example.smile.cnsjzhushou.presenter.contract.AppManagerContract;
 import com.example.smile.cnsjzhushou.ui.decoration.DividerItemDecoration;
@@ -43,12 +47,26 @@ public abstract class AppManangerFragment extends ProgressFragment<AppManagerPre
     }
 
     @Override
+    public void setupFragmentComponent(AppComponent appComponent) {
+
+        DaggerAppManagerComponent.builder()
+                .appComponent(appComponent)
+                .appManagerModule(new AppManagerModule(this))
+                .build().inject(this);
+    }
+
+    @Override
     public void showApps(List<AndroidApk> apps) {
 
     }
 
     @Override
     public void showDownloading(List<DownloadRecord> downloadRecords) {
+
+    }
+
+    @Override
+    public void showUpdateApps(List<AppInfo> appInfos) {
 
     }
 

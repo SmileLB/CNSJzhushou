@@ -16,7 +16,10 @@ import com.example.smile.cnsjzhushou.presenter.RecommendPresenter;
 import com.example.smile.cnsjzhushou.presenter.contract.AppInfoContract;
 import com.example.smile.cnsjzhushou.ui.adapter.IndexMultipleAdapter;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import zlc.season.rxdownload2.RxDownload;
 
 /**
  * Created by Administrator on 2017/6/17 0017.
@@ -29,6 +32,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     RecyclerView mRecyclerView;
 
     private IndexMultipleAdapter mAdatper;
+
+    @Inject
+    RxDownload mRxDownload;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -74,7 +80,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public void showResult(IndexBean indexBean) {
-        mAdatper = new IndexMultipleAdapter(getActivity());
+        mAdatper = new IndexMultipleAdapter(getActivity(),mRxDownload);
         mAdatper.setData(indexBean);
         mRecyclerView.setAdapter(mAdatper);
     }

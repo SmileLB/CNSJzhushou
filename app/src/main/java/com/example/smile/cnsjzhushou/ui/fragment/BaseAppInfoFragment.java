@@ -12,6 +12,8 @@ import com.example.smile.cnsjzhushou.R;
 import com.example.smile.cnsjzhushou.bean.AppInfo;
 import com.example.smile.cnsjzhushou.bean.PageBean;
 import com.example.smile.cnsjzhushou.di.component.AppComponent;
+import com.example.smile.cnsjzhushou.di.component.DaggerAppInfoComponent;
+import com.example.smile.cnsjzhushou.di.module.AppInfoModule;
 import com.example.smile.cnsjzhushou.presenter.AppInfoPresenter;
 import com.example.smile.cnsjzhushou.presenter.contract.AppInfoContract;
 import com.example.smile.cnsjzhushou.ui.activity.AppDetailActivity;
@@ -41,14 +43,20 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
     int page=0;
 
-
-
     abstract public AppInfoAdapter buildAdapter();
 
     abstract public int type();
 
     @Override
-    public abstract void setupFragmentComponent(AppComponent appComponent);
+    public void setupFragmentComponent(AppComponent appComponent) {
+
+        DaggerAppInfoComponent.builder()
+                .appComponent(appComponent)
+                .appInfoModule(new AppInfoModule(this))
+                .build()
+                .injectTopListFragment(this);
+
+    }
 
     @Override
     public void init() {
@@ -96,6 +104,11 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
     @Override
     public void onLoadMoreRequested() {
+        mPresenter.requestData(type(),page);
+    }
+
+    @Override
+    public void onEmptyViewClick() {
         mPresenter.requestData(type(),page);
     }
 
